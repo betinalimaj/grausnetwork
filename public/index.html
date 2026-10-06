@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cinebusca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add("js")</script>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="Cinebusca">
+            <span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5z" />
+                </svg></span>
+            <span class="brand-name">CINEBUSCA<span class="brand-dot">.</span></span>
+        </a>
+        <a class="profile-link mono" href="#" target="_blank" rel="noopener noreferrer">link</a>  
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow mono reveal"><span class="line"></span>8 GRAUS DE NETWORK</p>
+
+            <h1 class="title reveal">CINEBUSCA<span class="title-dot"></span></h1>
+
+            <p class="lead reveal">Dois atores. Um universo de conexões.</p>
+
+            <p class="sub reveal">Toda estrela tem uma história em comum. Encontre a sua.</p>
+            <!-- Troque pela sua imagem: -->
+            <div class="hero-img" role="img" aria-label="Câmera de cinema antiga"></div>
+        </section>
+
+        <section class="cast reveal">
+            <h2 class="section-title"><span class="num mono">01 /</span> Escolha o elenco
+                <svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+                </svg>
+            </h2>
+
+            <div class="selects">
+                <div class="field">
+                    <div class="field-head"><label for="origem">Ator de origem</label><span class="mono">PONTO DE
+                            PARTIDA</span></div>
+                    <div class="select">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+                        </svg>
+                        <select id="origem">
+                            <option>Selecione...</option>
+                        </select>
+                        <svg class="icon chevron" viewBox="0 0 24 24">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </div>
+                </div>
+
+                <button class="swap" type="button" aria-label="Inverter atores">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M4 8h16m-4-4 4 4-4 4M20 16H4m4-4-4 4 4 4" />
+                    </svg>
+                </button>
+
+                <div class="field">
+                    <div class="field-head"><label for="destino">Ator de destino</label><span class="mono">PONTO DE
+                            CHEGADA</span></div>
+                    <div class="select">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+                        </svg>
+                        <select id="destino">
+                            <option>Selecione...</option>
+                        </select>
+                        <svg class="icon chevron" viewBox="0 0 24 24">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary" type="button">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m20 20-4-4" />
+                        </svg>
+                        <span>Buscar relacionamento</span>
+                        <svg class="icon arrow" viewBox="0 0 24 24">
+                            <path d="M5 12h14m-6-6 6 6-6 6" />
+                        </svg>
+                    </button>
+                    <button class="btn btn-outline" type="button">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <circle cx="6" cy="19" r="2" />
+                            <circle cx="18" cy="5" r="2" />
+                            <path d="M6 17V9a4 4 0 0 1 4-4h6" />
+                        </svg>
+                        <span>Buscar até 8 graus</span>
+                    </button>
+                </div>
+            </div>
+
+            <p class="info"><svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 11v5M12 8h.01" />
+                </svg><b data-count="25">25</b> atores · <b data-count="17">17</b> filmes na base selecionada</p>
+
+        </section>
+
+        <section class="result reveal">
+            <div class="result-head">
+                <h2 class="section-title"><span class="num mono">02 /</span> Resultado</h2>
+                <span class="badge mono">BFS</span>
+            </div>
+
+            <div class="empty">
+                <div class="empty-icon"><span class="pulse"></span>
+                    <svg class="icon icon-lg" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M7 3v18M17 3v18M3 8h4M3 12h4M3 16h4M17 8h4M17 12h4M17 16h4" />
+                    </svg>
+                </div>
+                <h3>Seu próximo roteiro começa aqui</h3>
+                <p>Escolha dois atores e descubra os filmes que cruzam seus caminhos.</p>
+            </div>
+
+            <div class="result-foot">
+                <span>A conexão está nos detalhes.</span>
+                <span>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24">
+                        <path
+                            d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" />
+                    </svg>
+                    CAMINHOS MÍNIMOS · BFS
+                </span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer mono">
+        <p>© Betina Lima & Fracielle Ferarri</p>
+
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
