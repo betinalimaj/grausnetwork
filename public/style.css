@@ -5,6 +5,7 @@
   --text: #f4f4f5;
   --muted: #8a8a93;
   --red: #f0394d;
+  --amber: #d9a441;
   --radius: 10px;
   --font-display: "Bebas Neue", "Oswald", Impact, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -16,6 +17,10 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 body {
@@ -99,7 +104,6 @@ body {
   outline: 0;
 }
 
-/* Layout */
 .container {
   position: relative;
   max-width: 1360px;
@@ -107,7 +111,6 @@ body {
   padding: 0 86px 40px;
 }
 
-/* Hero */
 .hero {
   position: relative;
   padding-top: 72px;
@@ -173,9 +176,10 @@ body {
   font-weight: 600;
 }
 
-/* Cast form */
 .cast {
   margin-top: 28px;
+  position: relative;
+  z-index: 10;
 }
 .selects {
   display: flex;
@@ -202,6 +206,8 @@ body {
 }
 
 .select {
+  position: relative;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -232,6 +238,14 @@ body {
 .chevron {
   width: 16px;
   height: 16px;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+.select.open {
+  border-color: var(--red);
+}
+.select.open .chevron {
+  transform: rotate(180deg);
 }
 
 .swap {
@@ -326,7 +340,129 @@ body {
   outline-offset: 2px;
 }
 
-/* Result */
+.select select.native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.combo-trigger {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.combo-trigger.has-value {
+  color: var(--text);
+  font-weight: 500;
+}
+.combo-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.combo-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 8px;
+  background: #141416;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  cursor: default;
+  animation: comboIn 0.16s ease-out;
+}
+@keyframes comboIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.combo-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+}
+.combo-search:focus-within {
+  border-color: var(--red);
+  color: var(--text);
+}
+.combo-search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+.combo-search input::placeholder {
+  color: var(--muted);
+}
+
+.combo-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 264px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.combo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+}
+.combo-item.active {
+  background: #1c1c20;
+}
+.combo-item.selected {
+  color: var(--red);
+  font-weight: 500;
+}
+.combo-item .check {
+  opacity: 0;
+}
+.combo-item.selected .check {
+  opacity: 1;
+}
+.combo-empty {
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 .result {
   margin-top: 28px;
   border-top: 1px solid var(--border);
@@ -337,6 +473,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 36px;
 }
 
 .badge {
@@ -345,6 +482,27 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 6px 10px;
+}
+
+.reset {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    transform 0.4s ease;
+}
+.reset:hover,
+.reset:focus-visible {
+  color: var(--red);
+  transform: rotate(-180deg);
+  outline: 0;
 }
 
 .empty {
@@ -379,11 +537,94 @@ body {
 }
 
 .empty p {
-  max-width: 300px;
+  max-width: 320px;
   margin-top: 8px;
   font-size: 14px;
+  line-height: 1.7;
   color: var(--muted);
 }
+
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+.summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.summary-label {
+  font-size: 12px;
+  color: #9ca3b8;
+}
+.summary strong {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+.summary-count {
+  text-align: right;
+}
+.summary .count {
+  color: var(--red);
+}
+
+.paths {
+  margin-top: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: visible;
+  max-height: none;
+}
+
+.path {
+  padding: 22px 24px;
+}
+.path + .path {
+  border-top: 1px solid var(--border);
+}
+
+.path-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.path-head h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--red);
+}
+.path-len {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.path-len b {
+  color: var(--amber);
+  font-weight: 400;
+}
+
+.path-line {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.path-line .actor {
+  font-weight: 600;
+  color: var(--text);
+}
+.path-line .movie {
+  color: var(--muted);
+}
+.path-line .arrow {
+  color: var(--red);
+  margin: 0 6px;
+}
+
 .result-foot {
   display: flex;
   justify-content: space-between;
@@ -397,7 +638,6 @@ body {
   gap: 6px;
 }
 
-/* Footer */
 .footer {
   display: flex;
   align-items: center;
@@ -411,7 +651,6 @@ body {
   color: var(--muted);
 }
 
-/* Animações */
 .js .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -505,6 +744,22 @@ body {
   }
   .footer {
     padding: 14px 20px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .summary-count {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+  .path {
+    padding: 18px 16px;
+  }
+  .path-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
