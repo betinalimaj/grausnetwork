@@ -162,6 +162,6 @@ if (multiplosCaminhos.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum caminho encontrado");
+    console.log("Nenhum caminho encontrado.");
 }
 
