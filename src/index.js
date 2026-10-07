@@ -4,10 +4,7 @@ const { bfs, bfsAte8, bfsComLimite } = require("./bfs");
 
 const grafo = new Grafo();
 
-// ==========================================
 // SEED DOS DADOS
-// ==========================================
-
 function seed(grafo, filmes) {
     for (const filme of filmes) {
         grafo.adicionarVertice(filme.title);
@@ -20,18 +17,12 @@ function seed(grafo, filmes) {
 
 seed(grafo, filmes);
 
-// ==========================================
 // MOSTRAR O GRAFO
-// ==========================================
-
-console.log("=== GRAFO ===");
+console.log("GRAFO");
 grafo.mostrar();
 
-// ==========================================
 // TESTE 1 - BFS NORMAL
-// ==========================================
-
-console.log("\n=== TESTE 1: BFS NORMAL ===");
+console.log("\nTESTE 1: BFS NORMAL");
 
 const resultado = bfs(
     grafo,
@@ -52,14 +43,12 @@ if (resultado.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum relacionamento encontrado.");
+    console.log("Nenhum relacionamento encontrado");
 }
 
-// ==========================================
-// TESTE 2 - BFS COM LIMITE DE 1 ARESTA
-// ==========================================
 
-console.log("\n=== TESTE 2: BFS COM LIMITE DE 1 ARESTA ===");
+// TESTE 2 - BFS COM LIMITE DE 1 ARESTA
+console.log("\nTESTE 2: BFS COM LIMITE DE 1 ARESTA");
 
 const testeLimite = bfsComLimite(
     grafo,
@@ -81,14 +70,11 @@ if (testeLimite.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum caminho encontrado dentro do limite.");
+    console.log("Nenhum caminho encontrado dentro do limite");
 }
 
-// ==========================================
 // TESTE 3 - BFS COM LIMITE DE 8
-// ==========================================
-
-console.log("\n=== TESTE 3: BFS COM LIMITE DE 8 ARESTAS ===");
+console.log("\nTESTE 3: BFS COM LIMITE DE 8 ARESTAS");
 
 const resultadoBFS8 = bfsAte8(
     grafo,
@@ -109,19 +95,16 @@ if (resultadoBFS8.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum relacionamento encontrado em até 8 arestas.");
+    console.log("Nenhum relacionamento encontrado em até 8 arestas");
 }
 
-// ==========================================
 // TESTE 4 - ATOR INEXISTENTE
-// ==========================================
-
-console.log("\n=== TESTE 4: ATOR INEXISTENTE ===");
+console.log("\nTESTE 4: ATOR INEXISTENTE");
 
 const testeInexistente = bfsAte8(
     grafo,
     "Ken Kirzinger",
-    "Ator Que Nao Existe"
+    "Ator (que nao existe)"
 );
 
 if (testeInexistente.length > 0) {
@@ -137,14 +120,11 @@ if (testeInexistente.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum relacionamento encontrado.");
+    console.log("Nenhum relacionamento encontrado");
 }
 
-// ==========================================
 // TESTE 5 - MÚLTIPLOS CAMINHOS MÍNIMOS
-// ==========================================
-
-console.log("\n=== TESTE 5: MÚLTIPLOS CAMINHOS MÍNIMOS ===");
+console.log("\nTESTE 5: MÚLTIPLOS CAMINHOS MÍNIMOS");
 
 const grafoTeste = new Grafo();
 
@@ -182,6 +162,6 @@ if (multiplosCaminhos.length > 0) {
         );
     }
 } else {
-    console.log("Nenhum caminho encontrado.");
+    console.log("Nenhum caminho encontrado");
 }
 

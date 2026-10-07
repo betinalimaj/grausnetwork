@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  cinebusca:
+    build: .
+    container_name: cinebusca_app
+    ports:
+      - "8080:80"
+    restart: always
